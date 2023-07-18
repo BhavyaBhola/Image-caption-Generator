@@ -1,0 +1,84 @@
+{% load crispy_forms_tags %} {% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      h1 {
+        font-family: consolas, "Courier New", monospace;
+        text-align: center;
+      
+      }
+
+      .caption {
+        overflow: hidden;
+        white-space: nowrap;
+        font-family: consolas, "Courier New", monospace;
+        width: auto;
+        text-align: center;
+      }
+      
+      .d1{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+
+      .form {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        text-align: center;
+      }
+
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top:40px;
+        margin-bottom:40px;
+      }
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <h1>Image Caption Generator</h1>
+
+    <div class="img">
+      {% if image %}
+      <img src="{{ image.url }}" style="max-height: 300px" />
+      {% else %}
+      <img
+        src="{% static 'pereanu-sebastian-qFH7-yKoxik-unsplash.jpg' %}"
+        style="max-height: 300px"
+      />
+      {% endif %}
+    </div>
+
+
+      <div class="caption">
+        <h3> {{caption}}</h3>
+      </div>
+  
+    <div class="form">
+      <form method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %} {{form | crispy}}
+
+        <button type="submit">Generate</button>
+      </form>
+    </div>
+  </body>
+</html>
